@@ -344,7 +344,7 @@ alertmanager:
     loadBalancerSourceRanges: []
     ## Service type
     ##
-    type: Nodeport
+    type: ClusterIP
 
   ## If true, create a serviceMonitor for alertmanager
   ##
@@ -504,7 +504,6 @@ alertmanager:
     ## Define which Nodes the Pods are scheduled on.
     ## ref: https://kubernetes.io/docs/user-guide/node-selection/
     ##
-
     ## Define resources requests and limits for single Pods.
     ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
     ##
@@ -1809,7 +1808,7 @@ prometheus:
     loadBalancerSourceRanges: []
     ## Service type
     ##
-    type: ClusterIP
+    type: NodePort
 
     sessionAffinity: ""
 
@@ -2107,15 +2106,16 @@ prometheus:
 
     ## External labels to add to any time series or alerts when communicating with external systems
     ##
-    externalLabels: {}
-
+    externalLabels:
+      region: us-east-1
+      env: prod
     ## Name of the external label used to denote replica name
     ##
-    replicaExternalLabelName: ""
+    replicaExternalLabelName: __replica__
 
     ## If true, the Operator won't add the external label used to denote replica name
     ##
-    replicaExternalLabelNameClear: false
+    replicaExternalLabelNameClear: true
 
     ## Name of the external label used to denote Prometheus instance name
     ##
@@ -2246,7 +2246,7 @@ prometheus:
 
     ## How long to retain metrics
     ##
-    retention: 30d
+    retention: 10d
 
     ## Maximum size of metrics
     ##
@@ -2263,7 +2263,7 @@ prometheus:
     ## Number of replicas of each shard to deploy for a Prometheus deployment.
     ## Number of replicas multiplied by shards is the total number of Pods created.
     ##
-    replicas: 1
+    replicas: 2
 
     ## EXPERIMENTAL: Number of shards to distribute targets onto.
     ## Number of replicas multiplied by shards is the total number of Pods created.
@@ -2330,6 +2330,7 @@ prometheus:
     ## The remote_write spec configuration for Prometheus.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#remotewritespec
     remoteWrite: []
+    #  - url: http://vminsert.cm.madstack.com/insert/0/prometheus/
     # - url: http://remote1/push
     ## additionalRemoteWrite is appended to remoteWrite
     additionalRemoteWrite: []

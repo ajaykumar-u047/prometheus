@@ -1,0 +1,17 @@
+{
+	"ulid": "01FYRE8MAMK50VTV9FKZMDB3YY",
+	"minTime": 1647940021201,
+	"maxTime": 1647940226760,
+	"stats": {
+		"numSamples": 1352562,
+		"numSeries": 222772,
+		"numChunks": 222772
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01FYRE8MAMK50VTV9FKZMDB3YY"
+		]
+	},
+	"version": 1
+}

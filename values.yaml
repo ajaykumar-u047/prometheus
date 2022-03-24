@@ -90,21 +90,21 @@ kube-prometheus-stack:
 
   ## Provide custom recording or alerting rules to be deployed into the cluster.
   ##
-  additionalPrometheusRulesMap: 
-    rule-name:
-      groups:
-      - name: hello.rules
-        rules:
-        - record:  KubernetesDeployment-WithoutPods
-          expr: kube_deployment_status_replicas_available==0
-          for: 5m
-          labels:
-            namespace: monitoring
-            source_namespace: '{{ $labels.namespace }}'
-            severity: Sev1
-          annotations:
-            priority: P1
-            description: "  {{ $labels.deployment }} has 0 available replicas"
+  additionalPrometheusRulesMap: {}
+    # rule-name:
+    #   groups:
+    #   - name: hello.rules
+    #     rules:
+    #     - record:  KubernetesDeployment-WithoutPods
+    #       expr: kube_deployment_status_replicas_available==0
+    #       for: 5m
+    #       labels:
+    #         namespace: monitoring
+    #         source_namespace: '{{ $labels.namespace }}'
+    #         severity: Sev1
+    #       annotations:
+    #         priority: P1
+    #         description: "  {{ $labels.deployment }} has 0 available replicas"
   #  rule-name:
   #    groups:
   #    - name: my_group
@@ -735,7 +735,7 @@ kube-prometheus-stack:
         provider:
           allowUiUpdates: false
       datasources:
-        enabled: true
+        enabled: false
         defaultDatasourceEnabled: false
 
         ## URL of prometheus datasource
